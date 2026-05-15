@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Sede</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="min-h-screen bg-[#46525a] text-gray-100">
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 flex flex-col">
+
+        <!-- NAVBAR -->
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+        <!-- AREA PRINCIPAL -->
+        <!-- AREA PRINCIPAL -->
+        <section class="flex-1 p-4 md:p-6">
+
+            <!-- CONTENEDOR MÁS GRANDE -->
+            <div class="w-full max-w-6xl mx-auto bg-[#343a40] border border-gray-600 rounded shadow-2xl">
+
+                <!-- HEADER -->
+                <div class="flex items-center justify-between px-6 py-5 border-b border-gray-600">
+                    <h1 class="text-3xl font-semibold text-white"
+                        th:text="${sedes.id_sede == null} ? 'Agregar sede' : 'Editar sede'">
+                        Agregar sede
+                    </h1>
+
+                    <a th:href="@{/view/sedes}"
+                       class="text-gray-400 hover:text-white text-3xl font-bold">
+                        ×
+                    </a>
+                </div>
+
+                <!-- FORMULARIO -->
+                <form th:action="@{/view/sedes/save}"
+                      th:object="${sedes}"
+                      method="post"
+                      novalidate>
+
+                    <input type="hidden" th:field="*{id_sede}" />
+
+                    <!-- GRID MÁS GRANDE -->
+                    <div class="px-6 py-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                        <!-- DESCRIPCION -->
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-200">
+                                Descripción
+                            </label>
+
+                            <input type="text"
+                                   th:field="*{descripcion_sede}"
+                                   placeholder="Descripción"
+                                   class="w-full bg-[#343a40] border border-gray-500 rounded px-4 py-3 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <!-- DIRECCION -->
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-200">
+                                Dirección
+                            </label>
+
+                            <input type="text"
+                                   th:field="*{direccion_sede}"
+                                   placeholder="Dirección"
+                                   class="w-full bg-[#343a40] border border-gray-500 rounded px-4 py-3 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+
+
+                        <!-- ESTADO -->
+                        <div>
+                            <label class="block mb-2 text-sm font-semibold text-gray-200">
+                                Estado
+                            </label>
+
+                            <select th:field="*{estado}"
+                                    class="w-full bg-[#343a40] border border-gray-500 rounded px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Seleccionar estado...</option>
+                                <option value="activo">activo</option>
+                                <option value="inactivo">inactivo</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="flex justify-end gap-3 px-6 py-5 border-t border-gray-600">
+
+                        <a th:href="@{/view/sedes}"
+                           class="border border-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded">
+                            Cancelar
+                        </a>
+
+                        <button type="submit"
+                                class="bg-[#3f6fa3] hover:bg-[#4d7fb5] text-white px-6 py-2 rounded font-semibold">
+                            Guardar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+        <!-- FOOTER -->
+        <footer class="h-14 bg-[#343b42] border-t border-gray-700 flex items-center justify-between px-5 text-xs text-gray-400">
+            <p>
+                Copyright © 2026
+                <span class="text-blue-400 font-bold">ADSO 3063989</span>.
+                All rights reserved.
+            </p>
+
+            <p>Version 0.0.0</p>
+        </footer>
+
+    </main>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>
